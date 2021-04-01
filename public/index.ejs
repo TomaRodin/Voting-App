@@ -1,0 +1,68 @@
+<html>
+<body onload="myfunction()">
+
+<h1>Vote</h1>
+
+
+<h3>Lion</h3>  
+<p id="lion" ></p>
+
+<button class="first">Vote</button>
+
+
+<h3>Tiger</h3>
+<p id="tiger" ></p>
+
+<button class="second">Vote</button>
+
+
+<script>
+    function myfunction() {
+        var vote1 = "<%=votefirst%>"
+        var vote2 = "<%=votesecond%>"
+        var total = "<%=total%>"
+        if (total == 0){
+            document.getElementById("lion").innerHTML = "No Votes"
+            document.getElementById("tiger").innerHTML = "No Votes"
+        }
+        else {
+        console.log(vote1)
+        console.log(vote2)
+        console.log(total)
+        var votefir = Number(vote1) / Number(total)
+        var votefirst = votefir * 100
+        document.getElementById('lion').innerHTML = Math.round(votefirst)+"%"
+
+        var votesec = vote2 / total
+        var votesecond = votesec * 100
+        document.getElementById('tiger').innerHTML = Math.round(votesecond)+"%"
+        
+    }
+    }
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.first').click(function(){           	
+        $.post( "/", { status: "first"} );
+        location.reload();
+
+
+        })
+})
+$(document).ready(function(){
+        $('.second').click(function(){           	
+        $.post( "/", { status: "second"} );
+        location.reload();
+
+
+        })
+})
+</script>
+
+
+
+</body>
+</html>
