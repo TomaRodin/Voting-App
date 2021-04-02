@@ -156,14 +156,10 @@ app.post('/add', function (req, res) {
 })
 
 app.get('/Search/:name',function (req, res){
-    var JSONObject = fs.readFileSync(__dirname + '/vote.json')
-    if (JSONObject.includes(req.params.name)) {
     var votes = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
     var vote = votes.find(u => u.id === req.params.name);
     res.render(__dirname+'/public/search.ejs', {id:vote.id, first:vote.first, second:vote.second, votefirst: vote.numberfirst,votesecond: vote.numbersecond})
-} else {
-    res.redirect('/')
-}
+
 
 
 })
