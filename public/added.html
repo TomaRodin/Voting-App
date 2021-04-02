@@ -1,7 +1,5 @@
 <html>
-
 <body>
-
 
     <style>
         * {
@@ -161,62 +159,10 @@
     </div>
 
     <br>
-
-
-
-<form id="reform">
-<p>Specific ID for vote:</p>
-<input maxlength="15" class="name" name="name" placeholder="MyVote12" required>
-<br>
-<br>
-
-    <div class="div">
-        <input name="first" class="first" placeholder="First:" required>
-
-
-        <input name="second" class="second" placeholder="Second:" required>
-
-
-    </div>
-    <br>
-    <br>
-    <div style="text-align:center;">
-        <button class="butt">Add</button>
-
-    </div>
-</form>
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-<script>
-$(document).ready(function(){
-        $('.butt').click(function(){
-             $.post('/add',$('#reform').serialize()).done(
-               function(data){
-                if(data.redirect) {
-                      window.location.href=data.url;
-                     }
-                
-                })
-        })
-    })
-</script>
-
-
-    <script>
-        function getInputValue() {
-
-            var inputVal = document.getElementById("myInput").value;
-
-            window.location.href = "http://localhost:3000/Search/" + inputVal;
-        }
-    </script>
-
-
-
+<div style="text-align:center">
+    <img src="https://cms-assets.tutsplus.com/uploads/users/523/posts/32694/final_image/tutorial-preview-large.png" height="200px" width="auto">
+    <h3>Added Successfully</h3>
+    <a href="/">Home</a>
+</div>
 </body>
-
 </html>

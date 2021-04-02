@@ -109,6 +109,7 @@ app.post('/register', function (req, res) {
         array.push({
             "name": req.body.nuser,
             "pass": req.body.npass,
+            "mail": req.body.nmail
 
 
 
@@ -139,6 +140,11 @@ app.post('/add', function (req, res) {
         return true
     }
     else {
+        var votes = fs.readFileSync('./vote.json', 'utf8')
+        if (votes.includes(first) || votes.includes(second)) {
+            return true
+        }
+        else {
         var array = JSON.parse(fs.readFileSync('./vote.json', 'utf8'));
         array.push({
             "name": req.cookies.LoggedIn,
@@ -151,7 +157,8 @@ app.post('/add', function (req, res) {
 
         var jsonArray = JSON.stringify(array);
         fs.writeFileSync('./vote.json', jsonArray, { encoding: 'utf8', flag: 'w' });
-
+        res.redirect('/added')
+        }
     }
 })
 
@@ -185,6 +192,27 @@ app.post('/Search/:name', function(req, res) {
         console.log(votes)
         change = JSON.stringify(votes);
         fs.writeFileSync('./vote.json', change, { encoding: 'utf8', flag: 'w' });
+    }
+})
+
+app.get('/user/votes',function(req, res){
+    if (req.cookies.LoggedIn == undefined) {
+        res.redirect('/')
+    }
+    else {
+        var votes = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
+        
+        const user_votes = votes.filter((user) => user.name === 'Toma')
+        res.send(user_votes)
+    }
+})
+
+app.get('/added',function (req, res){
+    if (req.cookies.LoggedIn == undefined) {
+        res.redirect('/')
+    }
+    else {
+        res.sendFile(__dirname+'/public/added.html')
     }
 })
 
