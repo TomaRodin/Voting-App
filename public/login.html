@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div style="text-align:center">
+        <br>
+        <br>
+        <h1>Login</h1>
+    <form id="reform">
+        <h3>Username:</h3>
+        <input class="user" name="user">
+        <br>
+        <h3>Password:</h3>
+        <input type="password" class="pass" name="pass">
+        <br>
+        <br>
+        <button class="butt">Login</button>
+    </form>
+    <br>
+    <a href="/register">Register</a>
+    </div>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script>
+    $(document).ready(function(){
+            $('.butt').click(function(){
+                var user =$('input[name="user"]').val();
+                var pass =$('input[name="pass"]').val();
+                 $.post('/login',$('#reform').serialize()).done(
+                   function(data){
+                    if(data.redirect) {
+                          window.location.href=data.url;
+                         }
+                    
+                     console.log(user)
+                     console.log(pass)
+                    })
+            })
+        })
+    </script>
+
+<style>
+        .user  {
+            height:30px;
+            font-size:14pt;
+            border: none; /* <-- This thing here */
+            border:solid 1px #ccc;
+            border-radius: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .pass  {
+            height:30px;
+            font-size:14pt;
+            border: none; /* <-- This thing here */
+            border:solid 1px #ccc;
+            border-radius: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .butt {
+            background-color: #c49441;
+            border-radius: 28px;
+            border: 1px solid #ffffff;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 17px;
+            padding: 16px 31px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #c49441;
+        }
+
+        .butt:hover {
+            background-color: #d4a24c;
+        }
+
+        .butt:active {
+            position: relative;
+            top: 1px;
+        }
+        h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h3 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana
+        }
+        a {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+</style>
+
+
+</body>
+</html>
