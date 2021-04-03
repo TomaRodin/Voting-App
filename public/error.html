@@ -1,0 +1,44 @@
+<html>
+<body>
+
+    <head>
+        <link rel="stylesheet" href="/css/error.css">
+      </head>
+
+
+      <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/user">Account</a>
+        <a style="background-color: #d4a24c; color: white;" href="/add">Add</a>
+        <div class="search-container">
+
+            <input type="text" placeholder="Search.." id="myInput">
+            <button onClick="getInputValue()">Search</button>
+
+        </div>
+    </div>
+
+
+    </div>
+
+    <br>
+<div style="text-align:center">
+    <img src="/images/error.png" height="200px" width="auto">
+    <h3>Error 404</h3>
+    <p>Try to check your spelling</p>
+    <a href="/">Home</a>
+</div>
+
+<script>
+        function getInputValue() {
+                    
+                    var inputVal = document.getElementById("myInput").value;
+                        
+                        window.location.href = "http://localhost:3000/Search/"+inputVal;
+                }
+</script>
+
+
+
+</body>
+</html>

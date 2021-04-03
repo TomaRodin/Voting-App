@@ -166,8 +166,12 @@ app.post('/add', function (req, res) {
 app.get('/Search/:name', function (req, res) {
     var votes = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
     var vote = votes.find(u => u.id === req.params.name);
+    if (vote == null) {
+        res.sendFile(__dirname+"/public/error.html")
+    }
+    else {
     res.render(__dirname + '/public/search.ejs', { id: vote.id, first: vote.first, second: vote.second, votefirst: vote.numberfirst, votesecond: vote.numbersecond })
-
+    }
 
 
 })
@@ -196,17 +200,6 @@ app.post('/Search/:name', function (req, res) {
     }
 })
 
-app.get('/user/votes', function (req, res) {
-    if (req.cookies.LoggedIn == undefined) {
-        res.redirect('/')
-    }
-    else {
-        var votes = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
-
-        const user_votes = votes.filter((user) => user.name === 'Toma')
-        res.send(user_votes)
-    }
-})
 
 app.get('/added', function (req, res) {
     if (req.cookies.LoggedIn == undefined) {
@@ -217,5 +210,10 @@ app.get('/added', function (req, res) {
     }
 })
 
+app.get('/user/votes.json', (request, response) => {
+    var votes = JSON.parse(fs.readFileSync(__dirname+'/vote.json', 'UTF-8'));
+    response.json(votes);
+
+});
 
 app.listen(3000);

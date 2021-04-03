@@ -40,16 +40,46 @@
                         
                         window.location.href = "http://localhost:3000/Search/"+inputVal;
                 }
+                
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+  function myfunction() {
+
+    $.getJSON( "/user/votes.json", function( data){
+      
+        const searchKey = "<%=name%>"
+
+      
+        const searchResult = data.filter(({ name }) => name.toLowerCase() === searchKey.toLowerCase());
+
+
+        const parentWrapper = document.querySelector('.wrapper');
+        searchResult.forEach((el) => {
+            const child = document.createElement('h1');
+            child.textContent = el.id;
+            parentWrapper.appendChild(child);
+            const link = document.createElement('a')
+            link.href="/Search/"+el.id
+            link.textContent = "View"
+            parentWrapper.appendChild(link)
+        });
+        
+  });
+  }
 </script>
 
 <br>
 <br>
 
-<div style="border:1px solid black"></div>
-
-<a href="/user/votes">See Votes</a>
+<div style="border:1px solid #d4a24c"></div>
 
 
+
+<div style="padding-left: 50px;" class="wrapper"><div></div>
 
 
 </body>
