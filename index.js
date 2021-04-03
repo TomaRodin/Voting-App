@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser')
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
     fs.readFile('data.json', function (err, data) {
@@ -46,7 +47,7 @@ app.post('/', function (req, res) {
     }
 })
 
-app.get('/about',function(req, res){
+app.get('/about', function (req, res) {
     res.sendFile(__dirname + '/public/about.html')
 })
 
@@ -145,33 +146,33 @@ app.post('/add', function (req, res) {
             return true
         }
         else {
-        var array = JSON.parse(fs.readFileSync('./vote.json', 'utf8'));
-        array.push({
-            "name": req.cookies.LoggedIn,
-            "id": name,
-            "first": first,
-            "second": second,
-            "numberfirst": "0",
-            "numbersecond": "0"
-        })
+            var array = JSON.parse(fs.readFileSync('./vote.json', 'utf8'));
+            array.push({
+                "name": req.cookies.LoggedIn,
+                "id": name,
+                "first": first,
+                "second": second,
+                "numberfirst": "0",
+                "numbersecond": "0"
+            })
 
-        var jsonArray = JSON.stringify(array);
-        fs.writeFileSync('./vote.json', jsonArray, { encoding: 'utf8', flag: 'w' });
-        res.redirect('/added')
+            var jsonArray = JSON.stringify(array);
+            fs.writeFileSync('./vote.json', jsonArray, { encoding: 'utf8', flag: 'w' });
+            res.redirect('/added')
         }
     }
 })
 
-app.get('/Search/:name',function (req, res){
+app.get('/Search/:name', function (req, res) {
     var votes = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
     var vote = votes.find(u => u.id === req.params.name);
-    res.render(__dirname+'/public/search.ejs', {id:vote.id, first:vote.first, second:vote.second, votefirst: vote.numberfirst,votesecond: vote.numbersecond})
+    res.render(__dirname + '/public/search.ejs', { id: vote.id, first: vote.first, second: vote.second, votefirst: vote.numberfirst, votesecond: vote.numbersecond })
 
 
 
 })
 
-app.post('/Search/:name', function(req, res) {
+app.post('/Search/:name', function (req, res) {
     console.log(req.body.status)
     if (req.body.status === "first") {
         var votes = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
@@ -195,24 +196,24 @@ app.post('/Search/:name', function(req, res) {
     }
 })
 
-app.get('/user/votes',function(req, res){
+app.get('/user/votes', function (req, res) {
     if (req.cookies.LoggedIn == undefined) {
         res.redirect('/')
     }
     else {
         var votes = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
-        
+
         const user_votes = votes.filter((user) => user.name === 'Toma')
         res.send(user_votes)
     }
 })
 
-app.get('/added',function (req, res){
+app.get('/added', function (req, res) {
     if (req.cookies.LoggedIn == undefined) {
         res.redirect('/')
     }
     else {
-        res.sendFile(__dirname+'/public/added.html')
+        res.sendFile(__dirname + '/public/added.html')
     }
 })
 
