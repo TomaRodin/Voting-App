@@ -169,12 +169,40 @@ app.get('/Search/:name', function (req, res) {
     if (vote == null) {
         res.sendFile(__dirname+"/public/error.html")
     }
+    else if (vote.name == req.cookies.LoggedIn) {
+        res.render(__dirname + '/public/searchuservote.ejs', { id: vote.id, first: vote.first, second: vote.second, votefirst: vote.numberfirst, votesecond: vote.numbersecond })
+    }
     else {
     res.render(__dirname + '/public/search.ejs', { id: vote.id, first: vote.first, second: vote.second, votefirst: vote.numberfirst, votesecond: vote.numbersecond })
     }
 
 
 })
+
+app.get('/Search/:name/delete',function(req, res){
+    if (req.cookies.LoggedIn == undefined) {
+        res.redirect('/') 
+    }
+    else {
+        var votes = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
+        var vote = votes.find(u => u.id === req.params.name);
+        if (vote.name == req.cookies.LoggedIn) {
+
+        var array = JSON.parse(fs.readFileSync('./vote.json', 'UTF-8'));
+        console.log(array)
+        const filterArray = array.filter((item) => item.id !== req.params.name);
+        console.log('Deleted')
+        console.log(filterArray)
+        json = JSON.stringify(filterArray); //convert it back to json
+        fs.writeFileSync('./vote.json', json, { encoding: 'utf8', flag: 'w' });
+        res.redirect('/')
+    }   else {
+        res.redirect('/Search/'+req.params.name)
+    }
+    }
+})
+
+
 
 app.post('/Search/:name', function (req, res) {
     console.log(req.body.status)

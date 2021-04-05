@@ -25,10 +25,7 @@
           color: black;
         }
         
-        .topnav c.active {
-          background-color: #d4a24c;
-          color: white;
-        }
+ 
         
         .topnav .search-container {
           float: right;
@@ -72,17 +69,64 @@
             border: 1px solid #ccc;  
           }
         }
-        h1 {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        p {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana;
-        }
-.linkdiv {
-    position: absolute;
-    bottom: 8px;
-    right: 16px;
-    font-size: 18px;
-    display: flex;
+            .div {
+        margin-left: 600px;
+        margin-right: 605px;
+  display: flex;
+  justify-content: space-between;
 }
-        
+.first {
+	background-color:#c49441;
+	border-radius:28px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #c49441;
+}
+.first:hover {
+	background-color:#d4a24c;
+}
+.first:active {
+	position:relative;
+	top:1px;
+}
+.second {
+	background-color:#c49441;
+	border-radius:28px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #c49441;
+}
+.second:hover {
+	background-color:#d4a24c;
+}
+.second:active {
+	position:relative;
+	top:1px;
+}
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.bottomright {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 18px;
+}
